@@ -1,9 +1,13 @@
 import { component$ } from '@builder.io/qwik'
 import type { DocumentHead } from '@builder.io/qwik-city'
-import { Button } from '~/integrations/react/mui'
+import Home from '../components/home/home'
 
 export default component$(() => {
-  return <Button>Init</Button>
+  return (
+    <>
+      <Home client:only />
+    </>
+  )
 })
 
 export const head: DocumentHead = {

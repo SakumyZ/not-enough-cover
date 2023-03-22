@@ -1,17 +1,18 @@
-import { component$, useStylesScoped$ } from '@builder.io/qwik';
-import { QwikLogo } from '../icons/qwik';
-import styles from './header.css?inline';
+// import { component$, useStylesScoped$ } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
+// import { QwikLogo } from '../icons/qwik';
+// import styles from './header.css?inline';
+import classes from './header.module.css';
+import { Box, Link } from '~/integrations/react/mui'
 
 export default component$(() => {
-  useStylesScoped$(styles);
+  // useStylesScoped$(styles);
 
   return (
-    <header>
-      <div class="logo">
-        <a href="https://qwik.builder.io/" target="_blank" title="qwik">
-          <QwikLogo />
-        </a>
-      </div>
+    <Box component='header' className={`${classes.header}`} >
+      <Box className={`${classes.logo}`}>
+        <Link href="/" underline="none">Not Enough Cover</Link>
+      </Box>
       <ul>
         <li>
           <a href="https://qwik.builder.io/docs/components/overview/" target="_blank">
@@ -29,6 +30,6 @@ export default component$(() => {
           </a>
         </li>
       </ul>
-    </header>
+    </Box>
   );
 });

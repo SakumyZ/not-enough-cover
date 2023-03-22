@@ -22,9 +22,9 @@
     "qwik": "qwik"
   },
   "devDependencies": {
-    "@builder.io/qwik": "0.17.5",
-    "@builder.io/qwik-city": "0.1.0",
-    "@builder.io/qwik-react": "0.2.1",
+    "@builder.io/qwik": "^0.23.0",
+    "@builder.io/qwik-city": "^0.6.6",
+    "@builder.io/qwik-react": "^0.5.0",
     "@emotion/react": "11.10.4",
     "@emotion/styled": "11.10.4",
     "@mui/material": "5.10.10",
@@ -47,5 +47,8 @@
     "vercel": "^28.4.17",
     "vite": "4.1.1",
     "vite-tsconfig-paths": "3.5.0"
+  },
+  "dependencies": {
+    "fabricjs": "^1.0.0"
   }
 }
