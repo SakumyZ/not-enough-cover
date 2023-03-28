@@ -9,9 +9,10 @@ import { Controller } from 'react-hook-form'
 interface InputProps {
   label?: TextFieldProps['label']
   name?: string
+  onChange?: TextFieldProps['onChange']
 }
 
-const Input: React.FC<InputProps> = ({ label, name }) => {
+const Input: React.FC<InputProps> = ({ label, name, onChange: onSourceChange }) => {
   const { control } = useContext(formContext)
 
   return (
@@ -25,7 +26,10 @@ const Input: React.FC<InputProps> = ({ label, name }) => {
           autoComplete="fasle"
           name={name}
           value={value}
-          onChange={onChange}
+          onChange={event => {
+            onChange(event.target.value)
+            onSourceChange && onSourceChange(event as any)
+          }}
         />
       )}
     />

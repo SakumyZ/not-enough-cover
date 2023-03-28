@@ -52,6 +52,7 @@
   "dependencies": {
     "fabric": "^6.0.0-beta1",
     "mui-color-input": "^1.0.5",
+    "react-dropzone": "^14.2.3",
     "react-hook-form": "^7.43.7"
   }
 }

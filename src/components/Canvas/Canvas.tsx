@@ -4,20 +4,31 @@ import React, { useEffect, useRef } from 'react'
 import * as fabric from 'fabric' // v6
 
 interface CanvasProps {
+  width: number
+  height: number
   title: string
   subtitle: string
   backgroundColor: string
+  backgroundImage?: string
   onChange?: (canvas: fabric.Canvas) => void
 }
 
-const Canvas: React.FC<CanvasProps> = ({ title, subtitle, backgroundColor, onChange }) => {
+const Canvas: React.FC<CanvasProps> = ({
+  width,
+  height,
+  title,
+  subtitle,
+  backgroundColor,
+  backgroundImage,
+  onChange
+}) => {
   const canvasEl = useRef<any>(null)
-  const canvasWidth = 400
-  const canvasHeight = 300
 
   useEffect(() => {
     const options = {
-      backgroundColor
+      backgroundColor,
+      width,
+      height
     }
 
     const canvas = new fabric.Canvas(canvasEl.current, options)
@@ -27,23 +38,25 @@ const Canvas: React.FC<CanvasProps> = ({ title, subtitle, backgroundColor, onCha
       top: 80
     })
 
-    titleObj.left = canvasWidth / 2 - titleObj.width / 2
+    titleObj.left = width / 2 - titleObj.width / 2
 
     const subTitleObj = new fabric.Text(subtitle, { fontSize: 30, top: 120 })
 
-    subTitleObj.left = canvasWidth / 2 - subTitleObj.width / 2
+    subTitleObj.left = width / 2 - subTitleObj.width / 2
 
     canvas.add(titleObj)
     canvas.add(subTitleObj)
 
-    onChange && onChange(canvas)
+    if (backgroundImage) {
+      fabric.Image.fromURL(backgroundImage).then(img => {
+        img.scaleX = width / img.width
+        img.scaleY = height / img.height
+        canvas.backgroundImage = img
+        canvas.renderAll()
+      })
+    }
 
-    //  fabric 导出当前 canvas 为 jpg 图片
-    // const dataUrl = canvas.toDataURL({
-    //   format: 'jpeg',
-    //   quality: 1
-    // })
-    // console.log(dataUrl)
+    onChange && onChange(canvas)
 
     // make the fabric.Canvas instance available to your app
     // updateCanvasContext(canvas)
@@ -51,16 +64,9 @@ const Canvas: React.FC<CanvasProps> = ({ title, subtitle, backgroundColor, onCha
       // updateCanvasContext(null)
       canvas.dispose()
     }
-  }, [title, subtitle, backgroundColor])
+  }, [width, height, title, subtitle, backgroundColor, backgroundImage])
 
-  return (
-    <canvas
-      ref={canvasEl}
-      width={canvasWidth}
-      height={canvasHeight}
-      style={{ border: '1px solid #000' }}
-    ></canvas>
-  )
+  return <canvas ref={canvasEl} style={{ border: '1px solid #000' }}></canvas>
 }
 
 export default Canvas

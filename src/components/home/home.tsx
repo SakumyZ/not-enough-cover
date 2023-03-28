@@ -9,15 +9,29 @@ import Button from '@mui/material/Button'
 import ColorPicker from '~/components/common/ColorPicker/ColorPicker'
 import Canvas from '~/components/Canvas/Canvas'
 import type * as fabric from 'fabric' // v6
+import Select from '~/components/common/Select'
+import Upload from '~/components/common/Upload'
 
 interface FormData {
+  width: number
+  height: number
   title: string
   subtitle: string
   backgroundColor: string
+  preset: string
+  backgroundImage: string
 }
 
 export default qwikify$(() => {
-  const defaultValues: FormData = { title: '', subtitle: '', backgroundColor: '#fff' }
+  const defaultValues: FormData = {
+    width: 800,
+    height: 400,
+    title: '',
+    subtitle: '',
+    backgroundColor: '#fff',
+    preset: '',
+    backgroundImage: ''
+  }
 
   const formProps = useForm<FormData>({
     defaultValues
@@ -25,7 +39,7 @@ export default qwikify$(() => {
 
   const canvasRef = useRef<fabric.Canvas | null>(null)
 
-  const { watch } = formProps
+  const { watch, setValue } = formProps
 
   const [form, setForm] = useState<FormData>(defaultValues)
 
@@ -61,20 +75,41 @@ export default qwikify$(() => {
           {/* row 2 */}
           <Grid container>
             <Grid item xl={6}>
-              <Input label="尺寸：宽" />
+              <Input
+                label="尺寸：宽"
+                name="width"
+                onChange={() => {
+                  setValue('preset', '')
+                }}
+              />
             </Grid>
             <Grid item xl={6}>
-              <Input label="尺寸：高" />
+              <Input
+                label="尺寸：高"
+                name="height"
+                onChange={() => {
+                  setValue('preset', '')
+                }}
+              />
             </Grid>
           </Grid>
           {/* row 3 */}
           <Grid container>
             <Grid item xl={6}>
-              {/* <Input label="背景色" name="backgroundColor" /> */}
               <ColorPicker label="背景色" name="backgroundColor" />
             </Grid>
             <Grid item xl={6}>
-              <Input label="背景图" />
+              <Upload
+                onBeforeUpload={files => {
+                  console.log(files[0])
+                  // 将文件转换为 objeturl
+                  const url = URL.createObjectURL(files[0])
+                  setValue('backgroundImage', url)
+                  return false
+                }}
+              >
+                上传背景图
+              </Upload>
             </Grid>
           </Grid>
 
@@ -85,11 +120,30 @@ export default qwikify$(() => {
             </Grid>
             <Grid item xl={6}>
               {/**
-               * bilibi
+               * bilibi 1146 * 717
                * youtube
                * custom
                */}
-              <Input label="预设" />
+              {/* <Input label="预设" /> */}
+              <Select
+                label="预设"
+                name="preset"
+                options={[
+                  { value: '', label: 'None' },
+                  { value: '1', label: 'Bilibili - 1146 * 717' },
+                  { value: '2', label: 'Youtube' },
+                  { value: '3', label: 'Custom' }
+                ]}
+                onChange={value => {
+                  console.log(value)
+                  const map: Record<any, { height: number; width: number }> = {
+                    1: { width: 1146, height: 717 }
+                  }
+
+                  setValue('width', map[value].width)
+                  setValue('height', map[value].height)
+                }}
+              />
             </Grid>
           </Grid>
 
