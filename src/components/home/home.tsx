@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { qwikify$ } from '@builder.io/qwik-react'
 import Grid from '@mui/material/Grid'
+import Box from '@mui/material/Box'
 import Form, { useForm } from '~/components/common/Form/Form'
 import Input from '~/components/common/Input/Input'
 import Button from '@mui/material/Button'
@@ -63,119 +64,121 @@ export default qwikify$(() => {
 
   return (
     <ThemeProvider theme={theme}>
-    <Form {...formProps}>
-      <Grid container spacing={2} sx={{ height: '100%' }}>
-        <Grid item xl={3} sx={{ borderRight: '1px solid' }}>
-          {/* row 1 */}
-          <Grid container spacing={2}>
-            <Grid item xl={6}>
-              <Input label="主标题" name="title" />
-            </Grid>
-            <Grid item xl={6}>
-              <Input label="副标题" name="subtitle" />
-            </Grid>
+      <Form {...formProps}>
+        <Grid container spacing={2} sx={{ height: '100%' }}>
+          <Grid item xl={3}>
+            {/* row 1 */}
+            <Grid container spacing={2}>
+              <Grid item xl={6}>
+                <Input label="主标题" name="title" />
+              </Grid>
+              <Grid item xl={6}>
+                <Input label="副标题" name="subtitle" />
+              </Grid>
 
-            {/* row 2 */}
-            <Grid item xl={6}>
-              <Input
-                label="尺寸：宽"
-                name="width"
-                onChange={() => {
-                  setValue('preset', '')
-                }}
-              />
-            </Grid>
-            <Grid item xl={6}>
-              <Input
-                label="尺寸：高"
-                name="height"
-                onChange={() => {
-                  setValue('preset', '')
-                }}
-              />
-            </Grid>
+              {/* row 2 */}
+              <Grid item xl={6}>
+                <Input
+                  label="尺寸：宽"
+                  name="width"
+                  onChange={() => {
+                    setValue('preset', '')
+                  }}
+                />
+              </Grid>
+              <Grid item xl={6}>
+                <Input
+                  label="尺寸：高"
+                  name="height"
+                  onChange={() => {
+                    setValue('preset', '')
+                  }}
+                />
+              </Grid>
 
-            {/* row 3 */}
-            <Grid item xl={6}>
-              <ColorPicker label="背景色" name="backgroundColor" />
-            </Grid>
-            <Grid item xl={6}>
-              <Upload
-                onBeforeUpload={files => {
-                  console.log(files[0])
-                  // 将文件转换为 objeturl
-                  const url = URL.createObjectURL(files[0])
-                  setValue('backgroundImage', url)
-                  return false
-                }}
-              >
-                上传背景图
-              </Upload>
-            </Grid>
+              {/* row 3 */}
+              <Grid item xl={6}>
+                <ColorPicker label="背景色" name="backgroundColor" />
+              </Grid>
+              <Grid item xl={6}>
+                <Upload
+                  onBeforeUpload={files => {
+                    console.log(files[0])
+                    // 将文件转换为 objeturl
+                    const url = URL.createObjectURL(files[0])
+                    setValue('backgroundImage', url)
+                    return false
+                  }}
+                >
+                  上传背景图
+                </Upload>
+              </Grid>
 
-            {/* row 4 */}
-            <Grid item xl={6}>
-              <Input label="高级模式" />
-            </Grid>
-            <Grid item xl={6}>
-              {/**
-               * bilibi 1146 * 717
-               * youtube
-               * custom
-               */}
-              {/* <Input label="预设" /> */}
-              <Select
-                label="预设"
-                name="preset"
-                options={[
-                  { value: '', label: 'None' },
-                  { value: '1', label: 'Bilibili - 1146 * 717' },
-                  { value: '2', label: 'Youtube' },
-                  { value: '3', label: 'Custom' }
-                ]}
-                onChange={value => {
-                  console.log(value)
-                  const map: Record<any, { height: number; width: number }> = {
-                    1: { width: 1146, height: 717 }
-                  }
+              {/* row 4 */}
+              <Grid item xl={6}>
+                <Input label="高级模式" />
+              </Grid>
+              <Grid item xl={6}>
+                {/**
+                 * bilibi 1146 * 717
+                 * youtube
+                 * custom
+                 */}
+                {/* <Input label="预设" /> */}
+                <Select
+                  label="预设"
+                  name="preset"
+                  options={[
+                    { value: '', label: 'None' },
+                    { value: '1', label: 'Bilibili - 1146 * 717' },
+                    { value: '2', label: 'Youtube' },
+                    { value: '3', label: 'Custom' }
+                  ]}
+                  onChange={value => {
+                    console.log(value)
+                    const map: Record<any, { height: number; width: number }> = {
+                      1: { width: 1146, height: 717 }
+                    }
 
-                  setValue('width', map[value].width)
-                  setValue('height', map[value].height)
-                }}
-              />
-            </Grid>
+                    setValue('width', map[value].width)
+                    setValue('height', map[value].height)
+                  }}
+                />
+              </Grid>
 
-            {/* row 5 */}
-            <Grid item xl={6}>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  if (!canvasRef.current) return
+              {/* row 5 */}
+              <Grid item xl={6}>
+                <Button
+                  variant="contained"
+                  onClick={() => {
+                    if (!canvasRef.current) return
 
-                  const url = canvasRef.current.toDataURL({
-                    format: 'jpeg',
-                    quality: 1
-                  })
+                    const url = canvasRef.current.toDataURL({
+                      format: 'jpeg',
+                      quality: 1
+                    })
 
-                  donwloadImg(url)
-                }}
-              >
-                导出
-              </Button>
+                    donwloadImg(url)
+                  }}
+                >
+                  导出
+                </Button>
+              </Grid>
             </Grid>
           </Grid>
-        </Grid>
 
-        <Grid item xl={9}>
-          <Canvas
-            {...form}
-            onChange={canvas => {
-              canvasRef.current = canvas
-            }}
-          />
+          <Grid item xl={9}>
+            <Box ml={6}>
+              <Canvas
+                {...form}
+                onChange={canvas => {
+                  canvasRef.current = canvas
+                }}
+              />
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
-    </Form>
+      </Form>
     </ThemeProvider>
   )
 })
