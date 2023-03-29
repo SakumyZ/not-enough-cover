@@ -156,7 +156,7 @@ export default qwikify$(() => {
                     const url = canvasRef.current.toDataURL({
                       format: 'jpeg',
                       quality: 1
-                    })
+                    } as any)
 
                     donwloadImg(url)
                   }}
