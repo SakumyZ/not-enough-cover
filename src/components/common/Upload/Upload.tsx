@@ -3,6 +3,7 @@
 import React from 'react'
 import { useDropzone } from 'react-dropzone'
 import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
 
 interface UploadProps {
   children?: React.ReactNode
@@ -19,19 +20,13 @@ export const Upload: React.FC<UploadProps> = ({ children, onBeforeUpload }) => {
     }
   })
 
-  // const files = acceptedFiles.map(file => (
-  //   <li key={file.name}>
-  //     {file.name} - {file.size} bytes
-  //   </li>
-  // ))
-
   return (
-    <div className="container">
+    <Box className="container" display="flex" alignItems="flex-end" height="100%">
       {/* <div {...getRootProps({ className: 'dropzone' })}> */}
       <input {...getInputProps()} />
       <Button onClick={open}>{children}</Button>
       {/* </div> */}
-    </div>
+    </Box>
   )
 }
 

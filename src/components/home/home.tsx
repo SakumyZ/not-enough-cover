@@ -71,9 +71,8 @@ export default qwikify$(() => {
             <Grid item xl={6}>
               <Input label="副标题" name="subtitle" />
             </Grid>
-          </Grid>
-          {/* row 2 */}
-          <Grid container>
+
+            {/* row 2 */}
             <Grid item xl={6}>
               <Input
                 label="尺寸：宽"
@@ -92,9 +91,8 @@ export default qwikify$(() => {
                 }}
               />
             </Grid>
-          </Grid>
-          {/* row 3 */}
-          <Grid container>
+
+            {/* row 3 */}
             <Grid item xl={6}>
               <ColorPicker label="背景色" name="backgroundColor" />
             </Grid>
@@ -111,10 +109,8 @@ export default qwikify$(() => {
                 上传背景图
               </Upload>
             </Grid>
-          </Grid>
 
-          {/* row 4 */}
-          <Grid container>
+            {/* row 4 */}
             <Grid item xl={6}>
               <Input label="高级模式" />
             </Grid>
@@ -145,10 +141,8 @@ export default qwikify$(() => {
                 }}
               />
             </Grid>
-          </Grid>
 
-          {/* row 5 */}
-          <Grid container>
+            {/* row 5 */}
             <Grid item xl={6}>
               <Button
                 variant="contained"
@@ -168,6 +162,7 @@ export default qwikify$(() => {
             </Grid>
           </Grid>
         </Grid>
+
         <Grid item xl={9}>
           <Canvas
             {...form}

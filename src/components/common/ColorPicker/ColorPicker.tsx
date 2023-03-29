@@ -32,6 +32,9 @@ export const ColorPicker: React.FC<ColorPickerProps> = ({ name, label, tiny }) =
               variant="standard"
               {...field}
               format="hex"
+              InputProps={{
+                sx: { width: 'calc(100% - 32px)' }
+              }}
               onFocus={e => {
                 e.stopPropagation()
               }}

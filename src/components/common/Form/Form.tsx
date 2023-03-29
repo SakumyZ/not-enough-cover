@@ -33,7 +33,7 @@ export const Form: React.FC<React.PropsWithChildren<FormProps>> = ({
 }) => {
   return (
     <formContext.Provider value={useFormProps}>
-      <Box component="form" onSubmit={onSubmit && handleSubmit(onSubmit)}>
+      <Box component="form" onSubmit={onSubmit && handleSubmit(onSubmit)} height="100%">
         {children}
       </Box>
     </formContext.Provider>
