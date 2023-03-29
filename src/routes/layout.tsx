@@ -2,7 +2,7 @@ import { component$, Slot } from '@builder.io/qwik'
 import { loader$ } from '@builder.io/qwik-city'
 
 import Header from '../components/header/header'
-import {Box} from '~/integrations/react/mui'
+import { Box } from '~/integrations/react/mui'
 
 export const serverTimeLoader = loader$(() => {
   return {
@@ -11,21 +11,21 @@ export const serverTimeLoader = loader$(() => {
 })
 
 export default component$(() => {
-  const serverTime = serverTimeLoader.use()
+  // const serverTime = serverTimeLoader.use()
   return (
     <>
       <main>
         <Header />
-        <Box component='section' height='calc(100vh - 60px - 77px)'>
+        <Box component="section" height="calc(100% - 42px)">
           <Slot />
         </Box>
       </main>
-      <footer>
+      {/* <footer>
         <a href="https://www.builder.io/" target="_blank">
           Made with ♡ by Builder.io
           <div>{serverTime.value.date}</div>
         </a>
-      </footer>
+      </footer> */}
     </>
   )
 })

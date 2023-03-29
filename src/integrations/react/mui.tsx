@@ -10,7 +10,9 @@ import MUILink from '@mui/material/Link'
 import MUIPaper from '@mui/material/Paper'
 import MUISwitch from '@mui/material/Switch'
 import MUITextField from '@mui/material/TextField'
+import MUIThemeProvider from '@mui/material/styles/ThemeProvider'
 
+export const ThemeProvider = qwikify$(MUIThemeProvider)
 export const CssBaseline = qwikify$(MuiCssBaseline)
 export const Box = qwikify$(MUIBox)
 export const Stack = qwikify$(MUIStack)

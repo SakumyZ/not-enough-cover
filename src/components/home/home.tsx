@@ -11,6 +11,8 @@ import Canvas from '~/components/Canvas/Canvas'
 import type * as fabric from 'fabric' // v6
 import Select from '~/components/common/Select'
 import Upload from '~/components/common/Upload'
+import theme from '~/themes'
+import { ThemeProvider } from '@mui/material/styles'
 
 interface FormData {
   width: number
@@ -60,6 +62,7 @@ export default qwikify$(() => {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <Form {...formProps}>
       <Grid container spacing={2} sx={{ height: '100%' }}>
         <Grid item xl={3} sx={{ borderRight: '1px solid' }}>
@@ -173,5 +176,6 @@ export default qwikify$(() => {
         </Grid>
       </Grid>
     </Form>
+    </ThemeProvider>
   )
 })
