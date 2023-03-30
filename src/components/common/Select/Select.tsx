@@ -28,7 +28,7 @@ const Select: React.FC<SelectProps> = ({ label, name, options = [], onChange: on
           <MuiSelect
             variant="standard"
             value={value}
-            sx={{ width: 'calc(100% - 25.5px)' }}
+            sx={{ width: '195px' }}
             onChange={event => {
               onChange(event.target.value)
               onPopsChange && onPopsChange(event.target.value, event as any)

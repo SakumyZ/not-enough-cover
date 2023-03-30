@@ -100,7 +100,7 @@ export default qwikify$(() => {
               <Grid item xl={6}>
                 <ColorPicker label="背景色" name="backgroundColor" />
               </Grid>
-              <Grid item xl={6}>
+              <Grid item xl={6} display="flex" alignItems="flex-end">
                 <Upload
                   onBeforeUpload={files => {
                     console.log(files[0])
@@ -112,6 +112,13 @@ export default qwikify$(() => {
                 >
                   上传背景图
                 </Upload>
+                <Button
+                  onClick={() => {
+                    setValue('backgroundImage', '')
+                  }}
+                >
+                  移除背景
+                </Button>
               </Grid>
 
               {/* row 4 */}
